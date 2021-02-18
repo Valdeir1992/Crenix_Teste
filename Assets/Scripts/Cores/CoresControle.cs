@@ -35,5 +35,23 @@ public class CoresControle : MonoBehaviour
 
         Camera.main.backgroundColor = _data.CorFundo;
     }
+
+    public Color ConverterEnumParaCor(CoresEngrenagens cor)
+    {
+        switch (cor)
+        {
+            case CoresEngrenagens.AMARELO: return _data.Amarelo;
+
+            case CoresEngrenagens.ROJO: return _data.Rojo;
+
+            case CoresEngrenagens.AZUL_TONALIDADE_DESCONHECIDA: return _data.Azul;
+
+            case CoresEngrenagens.ROSA: return _data.Rosa;
+
+            case CoresEngrenagens.VERDE: return _data.Verde;
+
+            default: return Color.white;
+        }
+    }
     #endregion
 }
