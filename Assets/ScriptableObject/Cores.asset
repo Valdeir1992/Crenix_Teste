@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3ca92dbfdc1394e8b04385bddc56d9, type: 3}
   m_Name: New Cores Data
   m_EditorClassIdentifier: 
-  _rojo: {r: 0, g: 0, b: 0, a: 0}
-  _rosa: {r: 0, g: 0, b: 0, a: 0}
-  _amarelo: {r: 0, g: 0, b: 0, a: 0}
-  _verde: {r: 0, g: 0, b: 0, a: 0}
-  _azul: {r: 0, g: 0, b: 0, a: 0}
+  _rojo: {r: 0.76862746, g: 0.33333334, b: 0.80784315, a: 1}
+  _rosa: {r: 0.91764706, g: 0.3372549, b: 0.7019608, a: 1}
+  _amarelo: {r: 0.7607843, g: 0.8156863, b: 0.3019608, a: 1}
+  _verde: {r: 0, g: 0.85490197, b: 0.31764707, a: 1}
+  _azul: {r: 0, g: 0.84705883, b: 0.7647059, a: 1}
+  _corDeFundo: {r: 0.32156864, g: 0.54901963, b: 0.92941177, a: 1}
+  _corPanel: {r: 0.4862745, g: 0.67058825, b: 0.9764706, a: 1}
