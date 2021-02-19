@@ -29,7 +29,7 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
 
     public bool Ocupado { get => _ocupado; }
 
-    public int IndexDoSlot { get => _index; }
+    public int IndexDoSlot { get => _index; set => _index = value; }
 
     public CoresEngrenagens Cor { get => _corAtual; }
     #endregion

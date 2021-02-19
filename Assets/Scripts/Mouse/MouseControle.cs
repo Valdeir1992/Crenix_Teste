@@ -32,6 +32,12 @@ public class MouseControle : MonoBehaviour
     [SerializeField] private Image _icone;
     #endregion
 
+    #region EVENT
+    private event OnAddGear onAdd;
+
+    private event OnRemoveGear onRemove;
+    #endregion
+
     #region MÉTODOS UNITY
 
     private void Awake()
@@ -40,11 +46,24 @@ public class MouseControle : MonoBehaviour
 
         _corControle = FindObjectOfType<CoresControle>();
     }
+    private void OnEnable()
+    {
+        onAdd += FindObjectOfType<EngrenagensMundoControle>().AddGear;
+
+        onRemove += FindObjectOfType<EngrenagensMundoControle>().RemoverGear;
+    }
     private void Start()
     {
         StartCoroutine(_rotina);
 
         StartCoroutine(CheckClick());
+    }
+
+    private void OnDisable()
+    {
+        onAdd -= FindObjectOfType<EngrenagensMundoControle>().AddGear;
+
+        onRemove -= FindObjectOfType<EngrenagensMundoControle>().RemoverGear;
     }
     #endregion
 
@@ -140,6 +159,16 @@ public class MouseControle : MonoBehaviour
                     _destino.MudarCor(_corControle.ConverterEnumParaCor(_origem.Cor),_origem.Cor);
 
                     _destino.MostrarEngrenagem();
+
+                    if(_destino.GetType() == typeof(SlotMundo))
+                    {
+                        onAdd?.Invoke(_destino);
+                    }
+                    if(_origem.GetType() == typeof(SlotMundo))
+                    {
+                        onRemove?.Invoke(_origem);
+                    } 
+                    
 
                     _destino = null;
 

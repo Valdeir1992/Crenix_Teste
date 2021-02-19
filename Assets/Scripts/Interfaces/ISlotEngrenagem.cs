@@ -14,7 +14,7 @@ public interface ISlotEngrenagem
     #region VARIAVEIS PÚBLICAS
     bool Ocupado { get; } 
 
-    int IndexDoSlot { get; }
+    int IndexDoSlot { get; set; }
     #endregion
 
     #region MÉTODOS PRÓPRIOS
