@@ -32,8 +32,10 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
     public int IndexDoSlot { get => _index; set => _index = value; }
 
     public CoresEngrenagens Cor { get => _corAtual; }
+
+    public TipoDeMovimento Movimento { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); } 
     #endregion
-     
+
     #region EVENT
     private event OnClickSlot onClickSlot;
 
@@ -126,6 +128,12 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
     {
         onExitSlot?.Invoke();
     }
+
+    public void MoverEngrenagem(float valor)
+    {
+        throw new System.NotImplementedException();
+    }
+
 
 
 

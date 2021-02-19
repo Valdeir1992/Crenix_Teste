@@ -14,12 +14,15 @@ public interface ISlotEngrenagem
     #region VARIAVEIS PÚBLICAS
     bool Ocupado { get; } 
 
-    int IndexDoSlot { get; set; }
+    int IndexDoSlot { get; set; } 
+
+    CoresEngrenagens Cor { get; }
+
+    TipoDeMovimento Movimento { get; set; }
     #endregion
 
     #region MÉTODOS PRÓPRIOS
 
-    CoresEngrenagens Cor { get; }
 
     /// <summary>
     /// Método responsavel por ocultar engrenagem do slot.
@@ -42,5 +45,7 @@ public interface ISlotEngrenagem
     /// </summary>
     /// <returns></returns>
     Transform GetTransform();
+
+    void MoverEngrenagem(float valor);
     #endregion
 }
