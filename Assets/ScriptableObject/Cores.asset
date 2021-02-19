@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b3ca92dbfdc1394e8b04385bddc56d9, type: 3}
-  m_Name: New Cores Data
+  m_Name: Cores
   m_EditorClassIdentifier: 
   _rojo: {r: 0.76862746, g: 0.33333334, b: 0.80784315, a: 1}
   _rosa: {r: 0.91764706, g: 0.3372549, b: 0.7019608, a: 1}

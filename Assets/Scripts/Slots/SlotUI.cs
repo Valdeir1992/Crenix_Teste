@@ -12,13 +12,13 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Script responsavel pelos slots de ui.
 /// </summary>
-public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerClickHandler
+public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     #region VARIAVEIS PRIVADAS
 
     private Transform _transform;
 
-    private bool _ocupado;
+    private bool _ocupado = true;
 
     private int _index;
 
@@ -33,15 +33,40 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerClickHandler
 
     public CoresEngrenagens Cor { get => _corAtual; }
     #endregion
+     
+    #region EVENT
+    private event OnClickSlot onClickSlot;
+
+    private event OnEnterSlot onEnterSlot;
+
+    private event OnExitSlot onExitSlot;
+    #endregion
 
     #region MÉTODOS UNITY
     private void Awake()
     {
         _transform = transform; 
     }
+    private void OnEnable()
+    {
+        onClickSlot += FindObjectOfType<MouseControle>().AtivarIcone;
+
+        onEnterSlot += FindObjectOfType<MouseControle>().EnterSlot;
+
+        onExitSlot += FindObjectOfType<MouseControle>().ExitSlot;
+    }
     private void Start()
     { 
-        MudarCor(FindObjectOfType<CoresControle>().ConverterEnumParaCor(_corAtual));
+        MudarCor(FindObjectOfType<CoresControle>().ConverterEnumParaCor(_corAtual), _corAtual);
+    }
+    private void OnDisable()
+    {
+        onClickSlot -= FindObjectOfType<MouseControle>().AtivarIcone;
+
+        onEnterSlot -= FindObjectOfType<MouseControle>().EnterSlot; 
+
+        onExitSlot -= FindObjectOfType<MouseControle>().ExitSlot;
+
     }
     #endregion
 
@@ -54,22 +79,57 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerClickHandler
     public void MostrarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<Image>().enabled = true;
+
+        _ocupado = true;
     }
 
-    public void MudarCor(Color cor)
+    public void MudarCor(Color cor, CoresEngrenagens corEngrenagem)
     {
         _transform.GetChild(0).GetComponent<Image>().color = cor;
+
+        _corAtual = corEngrenagem;
     }
 
     public void OcultarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<Image>().enabled = false;
+
+        _ocupado = false; 
+    }
+    /// <summary>
+    /// Método que registra click do mouse e executa evento OnClickSlot.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (!_ocupado) return;
+
+        OcultarEngrenagem();
+
+        onClickSlot?.Invoke(this);
+    }
+    /// <summary>
+    /// ;étodo que resistra entrada do mouse no slot e executa evento OnEnterSlot.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_ocupado) return;
+                
+        onEnterSlot?.Invoke(this); 
+    }
+    /// <summary>
+    /// ;étodo que resistra saida do mouse no slot e executa evento OnExitSlot.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        onExitSlot?.Invoke();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OcultarEngrenagem();
-    }
+
+
+
 
 
     #endregion

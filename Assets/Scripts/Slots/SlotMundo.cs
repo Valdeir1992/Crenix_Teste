@@ -32,18 +32,56 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     public CoresEngrenagens Cor { get => _corAtual; }
     #endregion
 
+    #region EVENT
+    private event OnEnterSlot onEnterSlot;
+
+    private event OnExitSlot onExitSlot;
+
+    private event OnClickSlot onClickSlot;
+    #endregion
+
     #region MÉTODOS UNITY
     private void Awake()
     {
         _transform = transform; 
     }
+    private void OnEnable()
+    {
+        onEnterSlot += FindObjectOfType<MouseControle>().EnterSlot;
+
+        onExitSlot += FindObjectOfType<MouseControle>().ExitSlot;
+
+        onClickSlot += FindObjectOfType<MouseControle>().AtivarIcone;
+    }
     private void Start()
     { 
         MudarCor();
     }
+    private void OnDisable()
+    {
+        onEnterSlot -= FindObjectOfType<MouseControle>().EnterSlot;
+
+        onExitSlot -= FindObjectOfType<MouseControle>().ExitSlot;
+
+        onClickSlot -= FindObjectOfType<MouseControle>().AtivarIcone; 
+    }
     private void OnMouseDown()
     {
+        if (!_ocupado) return;
+
         OcultarEngrenagem();
+
+        onClickSlot?.Invoke(this);
+    }
+    private void OnMouseEnter()
+    {
+        if (_ocupado) return;
+
+        onEnterSlot?.Invoke(this);
+    }
+    private void OnMouseExit()
+    {
+        onExitSlot?.Invoke();
     }
     #endregion
 
@@ -56,13 +94,21 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     public void MostrarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+        MudarCor(FindObjectOfType<CoresControle>().ConverterEnumParaCor(_corAtual), _corAtual);
+
+        _ocupado = true;
     }
 
-    public void MudarCor(Color cor)
+    public void MudarCor(Color cor, CoresEngrenagens corEngrenagem)
     {
         _transform.GetChild(0).GetComponent<SpriteRenderer>().color = cor;
-    }
 
+        _corAtual = corEngrenagem;
+    }
+    /// <summary>
+    /// Métoro responsavel por deixar engrenagens dos slots no mundo transparente.
+    /// </summary>
     public void MudarCor()
     {
         _transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.2f);
@@ -71,6 +117,8 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     public void OcultarEngrenagem()
     {
         MudarCor();
+
+        _ocupado = false;
     }
     #endregion
 }
