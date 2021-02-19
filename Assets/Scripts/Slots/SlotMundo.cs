@@ -5,6 +5,7 @@
 * Data: 17/02/2021
 *****************************************************************************/
 
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -20,6 +21,8 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
     private int _index;
 
+    private TipoDeMovimento _movimento;
+
     [SerializeField] private CoresEngrenagens _corAtual;
     #endregion
 
@@ -30,6 +33,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     public int IndexDoSlot { get => _index; set => _index = value; }
 
     public CoresEngrenagens Cor { get => _corAtual; }
+    public TipoDeMovimento Movimento { get => _movimento; set => _movimento = value; }
     #endregion
 
     #region EVENT
@@ -120,5 +124,36 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
         _ocupado = false;
     }
+
+    public void MoverEngrenagem(float valor)
+    {
+        switch (_movimento)
+        {
+            case TipoDeMovimento.ROTACAO_COMPLETA_ANTIHORARIA: RotacaoCompleta(valor); return;
+
+            case TipoDeMovimento.ROTACAO_COMPLETA_HORARIA: RotacaoCompleta(-valor); return;
+
+            case TipoDeMovimento.ROTACAO_INCOMPLETA_ANTIHORARIA: RotacaoIncompleta(valor); return;
+
+            case TipoDeMovimento.ROTACAO_INCOMPLETA_HORARIA: RotacaoIncompleta(-valor); return;
+
+        }
+
+    }
+
+    private void RotacaoIncompleta(float valor)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 90 * Mathf.PingPong(valor,1));
+    }
+
+    private void RotacaoCompleta(float v)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 360 * v);
+    }
+
+
+
+
+
     #endregion
 }

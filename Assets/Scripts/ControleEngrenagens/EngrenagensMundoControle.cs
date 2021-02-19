@@ -5,7 +5,8 @@
 * Data: 19/02/2021
 *****************************************************************************/
 
- 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,6 +41,8 @@ public class EngrenagensMundoControle : MonoBehaviour
         SetIndexSlotMundo();
 
         Reset();
+
+        StartCoroutine(RotacionarEngrenagens());
     }
 
     private void OnDisable()
@@ -118,4 +121,58 @@ public class EngrenagensMundoControle : MonoBehaviour
         onStart?.Invoke();
     }
     #endregion
+
+    private IEnumerator RotacionarEngrenagens()
+    {
+        float timeElapsed = 0;
+        float contador = 0;
+        float resultado = 0; 
+        while (true)
+        {
+            timeElapsed += Time.deltaTime;
+            contador += Time.deltaTime;
+            resultado = contador /3;
+            if(resultado > 1)
+            {
+                contador = 0;
+            }
+            if(_slotsMundo.Count == 5)
+            {
+                foreach (ISlotEngrenagem slot in _slotsMundo.Values)
+                { 
+                    if(slot.IndexDoSlot < 4)
+                    {
+                        slot.Movimento = TipoDeMovimento.ROTACAO_COMPLETA_HORARIA;
+
+                        slot.MoverEngrenagem(resultado);
+                    }
+                    else
+                    {
+                        slot.Movimento = TipoDeMovimento.ROTACAO_COMPLETA_ANTIHORARIA; 
+
+                        slot.MoverEngrenagem(resultado);
+                    }
+                }
+            }
+            else
+            {
+                foreach (ISlotEngrenagem slot in _slotsMundo.Values)
+                {
+                    if (slot.IndexDoSlot < 4)
+                    {
+                        slot.Movimento = TipoDeMovimento.ROTACAO_INCOMPLETA_HORARIA;
+
+                        slot.MoverEngrenagem(timeElapsed);
+                    }
+                    else
+                    {
+                        slot.Movimento = TipoDeMovimento.ROTACAO_INCOMPLETA_ANTIHORARIA;
+
+                        slot.MoverEngrenagem(timeElapsed);
+                    }
+                }
+            }
+            yield return null;
+        }
+    }
 }
