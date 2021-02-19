@@ -5,8 +5,7 @@
 * Data: 19/02/2021
 *****************************************************************************/
 
-
-using System;
+ 
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,13 +13,25 @@ public delegate void OnAddGear(ISlotEngrenagem slot);
 public delegate void OnRemoveGear(ISlotEngrenagem slot);
 public class EngrenagensMundoControle : MonoBehaviour
 {
+    #region VARIAVEIS PRIVADAS
+
     private Dictionary<int, ISlotEngrenagem> _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
+    #endregion
+
+    #region MÉTODOS UNITY
 
     private void Start()
     {
         SetIndexSlotMundo();
     }
+    #endregion
 
+    #region MÉTODOS PRÓPRIOS
+
+    /// <summary>
+    /// Método que seta index de cada slots do mundo a partir da propriedade index.
+    /// <see cref="ISlotEngrenagem"/>
+    /// </summary>
     private void SetIndexSlotMundo()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -32,6 +43,10 @@ public class EngrenagensMundoControle : MonoBehaviour
         }
     } 
 
+    /// <summary>
+    /// Método responsavel por registrar adicao de engrenagem ao slot.
+    /// </summary>
+    /// <param name="slot">Recebe como parametro o slot onde a engrenagem sera adicionada</param>
     public void AddGear(ISlotEngrenagem slot)
     {
         if (_slotsMundo.ContainsKey(slot.IndexDoSlot))
@@ -46,6 +61,10 @@ public class EngrenagensMundoControle : MonoBehaviour
         VerificarSlots();
     }
 
+    /// <summary>
+    /// Método responsavel por registrar remocao de um engrenagem.
+    /// </summary>
+    /// <param name="slot">Recebe o slot onde a engrenagem sera removida.</param>
     public void RemoverGear(ISlotEngrenagem slot)
     {
         if (_slotsMundo.ContainsKey(slot.IndexDoSlot))
@@ -54,7 +73,9 @@ public class EngrenagensMundoControle : MonoBehaviour
         }
         VerificarSlots();
     }
-
+    /// <summary>
+    /// Método responsavel por fazer a contagem de engrenagens nos slots do mundo.
+    /// </summary>
     private void VerificarSlots()
     {
         if(_slotsMundo.Count == 5)
@@ -66,4 +87,5 @@ public class EngrenagensMundoControle : MonoBehaviour
             Debug.Log($"{5 - _slotsMundo.Count} precisam ser preenchidos");
         }
     }
+    #endregion
 }
