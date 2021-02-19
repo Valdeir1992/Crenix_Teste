@@ -35,6 +35,8 @@ public class EngrenagensMundoControle : MonoBehaviour
         onCompletTask += FindObjectOfType<TextoControle>().AoCompletarTarefa;
 
         onAtualizar += FindObjectOfType<TextoControle>().AtualizarTexto;
+
+        ResetControle.reset += Resete;
     }
     private void Start()
     {
@@ -51,7 +53,9 @@ public class EngrenagensMundoControle : MonoBehaviour
 
         onCompletTask -= FindObjectOfType<TextoControle>().AoCompletarTarefa;  
 
-        onAtualizar -= FindObjectOfType<TextoControle>().AtualizarTexto;
+        onAtualizar -= FindObjectOfType<TextoControle>().AtualizarTexto; 
+
+        ResetControle.reset -= Resete;
     }
     #endregion
 
@@ -119,6 +123,16 @@ public class EngrenagensMundoControle : MonoBehaviour
     private void Reset()
     {
         onStart?.Invoke();
+    }
+
+    private void Resete()
+    {
+        foreach (ISlotEngrenagem slot in _slotsMundo.Values)
+        { 
+            slot.OcultarEngrenagem();
+        }
+        _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
+        VerificarSlots();
     }
     #endregion
 

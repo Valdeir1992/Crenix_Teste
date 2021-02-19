@@ -134,11 +134,10 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
         throw new System.NotImplementedException();
     }
 
-
-
-
-
-
+    public void MudarCor()
+    {
+        throw new System.NotImplementedException();
+    }
 
     #endregion
 }

@@ -39,6 +39,8 @@ public interface ISlotEngrenagem
     /// </summary>
     /// <param name="cor">Recebe a cor desejada para a engrenagem</param>
     void MudarCor(Color cor, CoresEngrenagens corEngrenagem);
+
+    void MudarCor();
  
     /// <summary>
     /// Método responsavel por retornar transform do slot.
