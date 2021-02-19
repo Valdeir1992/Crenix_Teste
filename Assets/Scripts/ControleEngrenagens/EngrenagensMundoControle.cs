@@ -18,11 +18,37 @@ public class EngrenagensMundoControle : MonoBehaviour
     private Dictionary<int, ISlotEngrenagem> _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
     #endregion
 
-    #region MÉTODOS UNITY
+    #region EVENT
+    private event OnStartTeste onStart;
 
+    private event OnCompletedTask onCompletTask;
+
+    private event OnAtualizarTask onAtualizar;
+    #endregion
+
+    #region MÉTODOS UNITY
+    private void OnEnable()
+    {
+        onStart += FindObjectOfType<TextoControle>().AoIniciar;
+
+        onCompletTask += FindObjectOfType<TextoControle>().AoCompletarTarefa;
+
+        onAtualizar += FindObjectOfType<TextoControle>().AtualizarTexto;
+    }
     private void Start()
     {
         SetIndexSlotMundo();
+
+        Reset();
+    }
+
+    private void OnDisable()
+    {
+        onStart -= FindObjectOfType<TextoControle>().AoIniciar;
+
+        onCompletTask -= FindObjectOfType<TextoControle>().AoCompletarTarefa;  
+
+        onAtualizar -= FindObjectOfType<TextoControle>().AtualizarTexto;
     }
     #endregion
 
@@ -80,12 +106,16 @@ public class EngrenagensMundoControle : MonoBehaviour
     {
         if(_slotsMundo.Count == 5)
         {
-            Debug.Log("Slots preenchidos");
-        }
+            onCompletTask?.Invoke();
+        } 
         else
         {
-            Debug.Log($"{5 - _slotsMundo.Count} precisam ser preenchidos");
+            onAtualizar?.Invoke(_slotsMundo.Count);
         }
+    }
+    private void Reset()
+    {
+        onStart?.Invoke();
     }
     #endregion
 }

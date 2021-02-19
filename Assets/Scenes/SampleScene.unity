@@ -637,7 +637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENCAIXE AS ENGRENAGENS EM QUALQUER ORDEM!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a4c73ccfbd5014b9265ff66e77d6a8, type: 2}
   m_sharedMaterial: {fileID: 4793658846354500792, guid: 75a4c73ccfbd5014b9265ff66e77d6a8,
@@ -2440,6 +2440,7 @@ GameObject:
   - component: {fileID: 1466253618}
   - component: {fileID: 1466253619}
   - component: {fileID: 1466253620}
+  - component: {fileID: 1466253621}
   m_Layer: 0
   m_Name: Cenario
   m_TagString: Untagged
@@ -2492,6 +2493,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1049536357}
   _icone: {fileID: 511852166}
+--- !u!114 &1466253621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466253617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6bc47d280106b42b87540e24e8c005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 86779c48ba393354180a92e345dc8c83, type: 2}
+  _balaoTexto: {fileID: 387373942}
 --- !u!1 &1507910703
 GameObject:
   m_ObjectHideFlags: 0
