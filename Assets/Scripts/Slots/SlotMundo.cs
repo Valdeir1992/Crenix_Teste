@@ -23,7 +23,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
     private TipoDeMovimento _movimento;
 
-    [SerializeField] private CoresEngrenagens _corAtual;
+    [SerializeField] private CoresEngrenagens _corAtual; 
     #endregion
 
     #region VARIABEIS PUBLICAS
@@ -148,7 +148,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
     private void RotacaoCompleta(float v)
     {
-        transform.rotation = Quaternion.Euler(0, 0, 360 * v);
+        transform.rotation = Quaternion.Euler(0, 0, 360 * v); 
     }
 
 
