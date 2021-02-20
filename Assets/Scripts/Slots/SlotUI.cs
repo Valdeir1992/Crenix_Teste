@@ -120,17 +120,6 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
     public void OnPointerExit(PointerEventData eventData)
     {
         onExitSlot?.Invoke();
-    }
-
-    public void MoverEngrenagem(Vector3 valor)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void MudarCor()
-    {
-        throw new System.NotImplementedException();
-    }
-
+    } 
     #endregion
 }

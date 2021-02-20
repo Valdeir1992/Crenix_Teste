@@ -19,12 +19,12 @@ public class EngrenagensMundoControle : MonoBehaviour
 {
     #region VARIAVEIS PRIVADAS
 
-    private Dictionary<int, ISlotEngrenagem> _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
+    private Dictionary<int, SlotMundo> _slotsMundo = new Dictionary<int, SlotMundo>();
 
     [SerializeField] private DataMovimento _data; 
     #endregion
 
-    #region EVENT
+    #region EVENTS
     private event OnStartTeste onStart;
 
     private event OnCompletedTask onCompletTask;
@@ -47,7 +47,7 @@ public class EngrenagensMundoControle : MonoBehaviour
     {
         SetIndexSlotMundo();
 
-        Reset();
+        Resete();
 
         _data.SetCurva(); 
 
@@ -91,11 +91,11 @@ public class EngrenagensMundoControle : MonoBehaviour
     {
         if (_slotsMundo.ContainsKey(slot.IndexDoSlot))
         {
-            _slotsMundo[slot.IndexDoSlot] = slot;
+            _slotsMundo[slot.IndexDoSlot] = (SlotMundo)slot;
         }
         else
         { 
-            _slotsMundo.Add(slot.IndexDoSlot, slot);
+            _slotsMundo.Add(slot.IndexDoSlot, (SlotMundo)slot);
         } 
 
         VerificarSlots();
@@ -126,30 +126,39 @@ public class EngrenagensMundoControle : MonoBehaviour
         {
             onAtualizar?.Invoke(_slotsMundo.Count);
         }
-    }
-    private void Reset()
-    {
-        onStart?.Invoke();
-    }
+    } 
 
+    /// <summary>
+    /// Métoro responsavel por resetar configuracao dos slots do mundo.
+    /// </summary>
     private void Resete()
     {
         foreach (ISlotEngrenagem slot in _slotsMundo.Values)
         { 
             slot.OcultarEngrenagem();
         }
-        _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
+        _slotsMundo = new Dictionary<int, SlotMundo>();
+
         VerificarSlots();
+
+        onStart?.Invoke();
     }
     #endregion
 
+    #region ROTINAS
+
+    /// <summary>
+    /// Rotina responsavel por movimentar engrenagens.
+    /// </summary>
+    /// <see cref="DataMovimento"/>
+    /// <returns></returns>
     private IEnumerator RotacionarEngrenagens()
     { 
         while (true)
         { 
             if(_slotsMundo.Count == 5)
             {
-                foreach (ISlotEngrenagem slot in _slotsMundo.Values)
+                foreach (SlotMundo slot in _slotsMundo.Values)
                 { 
                     if(slot.IndexDoSlot < 4)
                     { 
@@ -165,7 +174,7 @@ public class EngrenagensMundoControle : MonoBehaviour
             }
             else
             {
-                foreach (ISlotEngrenagem slot in _slotsMundo.Values)
+                foreach (SlotMundo slot in _slotsMundo.Values)
                 {
                     if (slot.IndexDoSlot < 4)
                     { 
@@ -182,4 +191,5 @@ public class EngrenagensMundoControle : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }

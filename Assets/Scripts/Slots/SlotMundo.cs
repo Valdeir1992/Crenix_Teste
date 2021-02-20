@@ -85,7 +85,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     }
     #endregion
 
-    #region MÉTODOS PRÓPRIOS 
+    #region MÉTODOS PRÓPRIOS  
     public void MostrarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
@@ -115,15 +115,22 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
         _ocupado = false;
     }
-
+    /// <summary>
+    /// Método responsavel por movimentar engrenagens dos slots do mundo.
+    /// </summary>
+    /// <param name="valor">Recebe um vetor para movimentar.</param>
     public void MoverEngrenagem(Vector3 valor)
     {
         Rotacao(valor);
 
     } 
+    /// <summary>
+    /// Método responsavel por aplicar rotacao as engrenagens.
+    /// </summary>
+    /// <param name="valor"></param>
     private void Rotacao(Vector3 valor)
     {
-        transform.rotation = Quaternion.Euler(valor);
+        _transform.GetChild(0).rotation = Quaternion.Euler(valor);
     } 
     #endregion
 }

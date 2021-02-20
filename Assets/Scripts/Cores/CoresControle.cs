@@ -36,6 +36,11 @@ public class CoresControle : MonoBehaviour
         Camera.main.backgroundColor = _data.CorFundo;
     }
 
+    /// <summary>
+    /// Método responsavel por converter enum em cor.
+    /// </summary>
+    /// <param name="cor">Recebe enum com uma das cores.</param>
+    /// <returns></returns>
     public Color ConverterEnumParaCor(CoresEngrenagens cor)
     {
         switch (cor)

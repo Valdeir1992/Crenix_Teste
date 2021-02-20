@@ -36,10 +36,6 @@ public interface ISlotEngrenagem
     /// Método responsavel por mudar cor da engrenagem.
     /// </summary>
     /// <param name="cor">Recebe a cor desejada para a engrenagem</param>
-    void MudarCor(Color cor, CoresEngrenagens corEngrenagem);
-
-    void MudarCor();
-  
-    void MoverEngrenagem(Vector3 valor);
+    void MudarCor(Color cor, CoresEngrenagens corEngrenagem); 
     #endregion
 }
