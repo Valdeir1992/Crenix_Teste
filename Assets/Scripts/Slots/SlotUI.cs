@@ -31,9 +31,7 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
 
     public int IndexDoSlot { get => _index; set => _index = value; }
 
-    public CoresEngrenagens Cor { get => _corAtual; }
-
-    public TipoDeMovimento Movimento { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); } 
+    public CoresEngrenagens Cor { get => _corAtual; } 
     #endregion
 
     #region EVENT
@@ -72,12 +70,7 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
     }
     #endregion
 
-    #region MÉTODOS PRÓPRIOS
-    public Transform GetTransform()
-    {
-        return _transform;
-    }
-
+    #region MÉTODOS PRÓPRIOS 
     public void MostrarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<Image>().enabled = true;
@@ -129,7 +122,7 @@ public class SlotUI : MonoBehaviour, ISlotEngrenagem, IPointerDownHandler, IPoin
         onExitSlot?.Invoke();
     }
 
-    public void MoverEngrenagem(float valor)
+    public void MoverEngrenagem(Vector3 valor)
     {
         throw new System.NotImplementedException();
     }

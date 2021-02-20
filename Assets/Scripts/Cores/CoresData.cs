@@ -15,15 +15,15 @@ public class CoresData : ScriptableObject
 {
     #region VARIAVEIS PRIVADAS
 
-    [SerializeField] private Color _rojo;
+    [SerializeField] private Color _cor01;
 
-    [SerializeField] private Color _rosa;
+    [SerializeField] private Color _cor02;
 
-    [SerializeField] private Color _amarelo;
+    [SerializeField] private Color _cor03;
 
-    [SerializeField] private Color _verde;
+    [SerializeField] private Color _cor04;
 
-    [SerializeField] private Color _azul;
+    [SerializeField] private Color _cor05;
 
     [SerializeField] private Color _corDeFundo;
 
@@ -32,15 +32,15 @@ public class CoresData : ScriptableObject
 
     #region PROPRIEDADES
 
-    public Color Rojo { get => _rojo; }
+    public Color Cor01 { get => _cor01; }
 
-    public Color Rosa { get => _rosa; }
+    public Color Cor02 { get => _cor02; }
 
-    public Color Amarelo { get => _amarelo; }
+    public Color Cor03 { get => _cor03; }
 
-    public Color Verde { get => _verde; }
+    public Color Cor04 { get => _cor04; }
 
-    public Color Azul { get => _azul; }
+    public Color Cor05 { get => _cor05; }
 
     public Color CorFundo { get => _corDeFundo; }
 

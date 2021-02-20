@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c6557ec022480d4aad92742132f52b4, type: 3}
-  m_Name: Textos
+  m_Name: TextosAlternativo
   m_EditorClassIdentifier: 
   _falaInicio: ENCAIXE AS ENGRENAGENS EM QUALQUER ORDEM!
   _falaEngrenagensCompletas: "YAY, PARAB\xC9NS. TASK CONCLU\xCDDA!"

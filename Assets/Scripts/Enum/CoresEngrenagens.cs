@@ -10,9 +10,9 @@
 /// </summary>
 public enum CoresEngrenagens  
 {
-     ROSA,
-     ROJO,
-     VERDE,
-     AMARELO,
-     AZUL_TONALIDADE_DESCONHECIDA
+     COR01,
+     COR02,
+     COR03,
+     COR04,
+     COR05
 }

@@ -16,9 +16,7 @@ public interface ISlotEngrenagem
 
     int IndexDoSlot { get; set; } 
 
-    CoresEngrenagens Cor { get; }
-
-    TipoDeMovimento Movimento { get; set; }
+    CoresEngrenagens Cor { get; } 
     #endregion
 
     #region MÉTODOS PRÓPRIOS
@@ -41,13 +39,7 @@ public interface ISlotEngrenagem
     void MudarCor(Color cor, CoresEngrenagens corEngrenagem);
 
     void MudarCor();
- 
-    /// <summary>
-    /// Método responsavel por retornar transform do slot.
-    /// </summary>
-    /// <returns></returns>
-    Transform GetTransform();
-
-    void MoverEngrenagem(float valor);
+  
+    void MoverEngrenagem(Vector3 valor);
     #endregion
 }

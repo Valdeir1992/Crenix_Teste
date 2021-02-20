@@ -4,8 +4,7 @@
 * Programador: Valdeir Antonio do Nascimento
 * Data: 17/02/2021
 *****************************************************************************/
-
-using System;
+ 
 using UnityEngine;
 
 /// <summary>
@@ -19,9 +18,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
     private bool _ocupado;
 
-    private int _index;
-
-    private TipoDeMovimento _movimento;
+    private int _index; 
 
     [SerializeField] private CoresEngrenagens _corAtual;
     #endregion
@@ -32,8 +29,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
 
     public int IndexDoSlot { get => _index; set => _index = value; }
 
-    public CoresEngrenagens Cor { get => _corAtual; }
-    public TipoDeMovimento Movimento { get => _movimento; set => _movimento = value; }
+    public CoresEngrenagens Cor { get => _corAtual; } 
     #endregion
 
     #region EVENT
@@ -89,12 +85,7 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
     }
     #endregion
 
-    #region MÉTODOS PRÓPRIOS
-    public Transform GetTransform()
-    {
-        return _transform;
-    }
-
+    #region MÉTODOS PRÓPRIOS 
     public void MostrarEngrenagem()
     {
         _transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
@@ -125,35 +116,14 @@ public class SlotMundo : MonoBehaviour, ISlotEngrenagem
         _ocupado = false;
     }
 
-    public void MoverEngrenagem(float valor)
+    public void MoverEngrenagem(Vector3 valor)
     {
-        switch (_movimento)
-        {
-            case TipoDeMovimento.ROTACAO_COMPLETA_ANTIHORARIA: RotacaoCompleta(valor); return;
+        Rotacao(valor);
 
-            case TipoDeMovimento.ROTACAO_COMPLETA_HORARIA: RotacaoCompleta(-valor); return;
-
-            case TipoDeMovimento.ROTACAO_INCOMPLETA_ANTIHORARIA: RotacaoIncompleta(valor); return;
-
-            case TipoDeMovimento.ROTACAO_INCOMPLETA_HORARIA: RotacaoIncompleta(-valor); return;
-
-        }
-
-    }
-
-    private void RotacaoIncompleta(float valor)
+    } 
+    private void Rotacao(Vector3 valor)
     {
-        transform.rotation = Quaternion.Euler(0, 0, 90 * Mathf.PingPong(valor,1));
-    }
-
-    private void RotacaoCompleta(float v)
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 360 * v);
-    }
-
-
-
-
-
+        transform.rotation = Quaternion.Euler(valor);
+    } 
     #endregion
 }

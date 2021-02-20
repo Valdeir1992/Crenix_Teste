@@ -12,11 +12,16 @@ using UnityEngine;
 
 public delegate void OnAddGear(ISlotEngrenagem slot);
 public delegate void OnRemoveGear(ISlotEngrenagem slot);
+/// <summary>
+/// Script responsavel por gerenciar features dos slotsMundo.
+/// </summary>
 public class EngrenagensMundoControle : MonoBehaviour
 {
     #region VARIAVEIS PRIVADAS
 
     private Dictionary<int, ISlotEngrenagem> _slotsMundo = new Dictionary<int, ISlotEngrenagem>();
+
+    [SerializeField] private DataMovimento _data; 
     #endregion
 
     #region EVENT
@@ -44,7 +49,9 @@ public class EngrenagensMundoControle : MonoBehaviour
 
         Reset();
 
-        StartCoroutine(RotacionarEngrenagens());
+        _data.SetCurva(); 
+
+        StartCoroutine(RotacionarEngrenagens()); 
     }
 
     private void OnDisable()
@@ -137,34 +144,22 @@ public class EngrenagensMundoControle : MonoBehaviour
     #endregion
 
     private IEnumerator RotacionarEngrenagens()
-    {
-        float timeElapsed = 0;
-        float contador = 0;
-        float resultado = 0; 
+    { 
         while (true)
-        {
-            timeElapsed += Time.deltaTime;
-            contador += Time.deltaTime;
-            resultado = contador /3;
-            if(resultado > 1)
-            {
-                contador = 0;
-            }
+        { 
             if(_slotsMundo.Count == 5)
             {
                 foreach (ISlotEngrenagem slot in _slotsMundo.Values)
                 { 
                     if(slot.IndexDoSlot < 4)
-                    {
-                        slot.Movimento = TipoDeMovimento.ROTACAO_COMPLETA_HORARIA;
+                    { 
 
-                        slot.MoverEngrenagem(resultado);
+                        slot.MoverEngrenagem(new Vector3(0,0,_data.CurvaCompleta.Evaluate(Time.time/_data.TempoRotacaoCompleta) * -_data.AnguloCompleto));
                     }
                     else
-                    {
-                        slot.Movimento = TipoDeMovimento.ROTACAO_COMPLETA_ANTIHORARIA; 
+                    { 
 
-                        slot.MoverEngrenagem(resultado);
+                        slot.MoverEngrenagem(new Vector3(0, 0, _data.CurvaCompleta.Evaluate(Time.time/ _data.TempoRotacaoCompleta) * _data.AnguloCompleto));
                     }
                 }
             }
@@ -173,16 +168,14 @@ public class EngrenagensMundoControle : MonoBehaviour
                 foreach (ISlotEngrenagem slot in _slotsMundo.Values)
                 {
                     if (slot.IndexDoSlot < 4)
-                    {
-                        slot.Movimento = TipoDeMovimento.ROTACAO_INCOMPLETA_HORARIA;
+                    { 
 
-                        slot.MoverEngrenagem(timeElapsed);
+                        slot.MoverEngrenagem(new Vector3(0,0,-_data.AnguloIncompleto * _data.CurvaIncompleta.Evaluate(Time.time/ _data.TempoRotacaoIncompleta))); 
                     }
                     else
-                    {
-                        slot.Movimento = TipoDeMovimento.ROTACAO_INCOMPLETA_ANTIHORARIA;
+                    { 
 
-                        slot.MoverEngrenagem(timeElapsed);
+                        slot.MoverEngrenagem(new Vector3(0,0, _data.AnguloIncompleto * _data.CurvaIncompleta.Evaluate(Time.time/ _data.TempoRotacaoIncompleta)));
                     }
                 }
             }

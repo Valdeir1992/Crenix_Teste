@@ -1,12 +1,24 @@
-﻿using System.Collections;
+﻿/******************************************************************************
+* Copyright (c) 2021 Crenix
+* All rights reserved.
+* Programador: Valdeir Antonio do Nascimento
+* Data: 20/02/2021
+*****************************************************************************/
+
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script responsavel por features ligadas ao inventario de engrenagens.
+/// </summary>
 public class InventarioControle : MonoBehaviour
 {
-    private List<ISlotEngrenagem> _engrenagensInventario = new List<ISlotEngrenagem>();
-    // Start is called before the first frame update
+    #region VARIAVEIS PRIVADAS
 
+    private List<ISlotEngrenagem> _engrenagensInventario = new List<ISlotEngrenagem>();
+    #endregion
+
+    #region MÉTODOS UNITY
     private void OnEnable()
     {
         ResetControle.reset += Resete;
@@ -19,7 +31,13 @@ public class InventarioControle : MonoBehaviour
     {
         ResetControle.reset -= Resete;
     }
+    #endregion
 
+    #region MÉTODOS PRÓPRIOS
+
+    /// <summary>
+    /// Método responsavel por pegar referencia de todos os slotsUI.
+    /// </summary>
     private void PegarTodosEngrenagens()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -28,18 +46,24 @@ public class InventarioControle : MonoBehaviour
             {
                 _engrenagensInventario.Add(slot);
             }
-        }
-        Debug.Log(_engrenagensInventario.Count);
+        } 
     }
     
+    /// <summary>
+    /// Método responsavel por resetar slosUI.
+    /// <see cref="ResetControle"/>
+    /// </summary>
     private void Resete()
     {
         int contador = 0;
         foreach (ISlotEngrenagem slot in _engrenagensInventario)
         { 
             slot.MudarCor(FindObjectOfType<CoresControle>().ConverterEnumParaCor((CoresEngrenagens)contador), (CoresEngrenagens)contador);
+
             slot.MostrarEngrenagem();
+
             contador++;
         }
     }
+    #endregion
 }

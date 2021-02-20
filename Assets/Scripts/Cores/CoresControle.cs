@@ -40,15 +40,15 @@ public class CoresControle : MonoBehaviour
     {
         switch (cor)
         {
-            case CoresEngrenagens.AMARELO: return _data.Amarelo;
+            case CoresEngrenagens.COR04: return _data.Cor03;
 
-            case CoresEngrenagens.ROJO: return _data.Rojo;
+            case CoresEngrenagens.COR02: return _data.Cor01;
 
-            case CoresEngrenagens.AZUL_TONALIDADE_DESCONHECIDA: return _data.Azul;
+            case CoresEngrenagens.COR05: return _data.Cor05;
 
-            case CoresEngrenagens.ROSA: return _data.Rosa;
+            case CoresEngrenagens.COR01: return _data.Cor02;
 
-            case CoresEngrenagens.VERDE: return _data.Verde;
+            case CoresEngrenagens.COR03: return _data.Cor04;
 
             default: return Color.white;
         }
